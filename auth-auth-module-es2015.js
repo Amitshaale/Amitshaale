@@ -719,7 +719,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"auth-header\">\n    <div class=\"header-inner\">\n        <img src=\"assets/img/logo.png\" routerLink=\"/\">\n        <button mat-stroked-button routerLink=\"/auth/signup\">Sign up</button>\n    </div>\n</div>\n\n<section class=\"auth-wrapper\">\n    <div class=\"container\">\n        <div class=\"row justify-content-md-center align-items-center\">\n            <div class=\"col-lg-6\">\n                <div class=\"auth-heading\">\n                    <h1>Update Phone Number</h1>\n                    <p>New to Shaale? <a href=\"auth/signup\">Sign Up</a></p>\n                </div>\n                <div class=\"auth-outer\">\n                    <form [formGroup]=\"updatePhoneForm\" (ngSubmit)=\"onSubmit()\">\n                        <div class=\"mat-phone-field\">\n                            <ngx-intl-tel-input [cssClass]=\"'custom-phone-input'\"\n                                [preferredCountries]=\"preferredCountries\" [enableAutoCountrySelect]=\"false\"\n                                [enablePlaceholder]=\"true\" [searchCountryFlag]=\"true\"\n                                [searchCountryField]=\"[SearchCountryField.Iso2, SearchCountryField.Name]\"\n                                [selectFirstCountry]=\"false\" [selectedCountryISO]=\"CountryISO.India\" [maxLength]=\"15\"\n                                [tooltipField]=\"TooltipLabel.Name\" [phoneValidation]=\"true\"\n                                [separateDialCode]=\"separateDialCode\" name=\"phone\" formControlName=\"phone\">\n                            </ngx-intl-tel-input>\n                            <div *ngIf=\"updatePhoneForm.controls['phone'].touched\">\n                                <mat-error *ngIf=\"hasError('phone', 'required')\">Phone is required </mat-error>\n                                <mat-error *ngIf=\"hasError('phone', 'validatePhoneNumber')\">Phone is not valid\n                                </mat-error>\n                            </div>\n                        </div>\n                        <button mat-raised-button class=\"login-button\" [disabled]=\"updatePhoneForm.invalid\">Update</button>\n                    </form>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"auth-header\">\n    <div class=\"header-inner\">\n        <img src=\"assets/img/logo.png\" routerLink=\"/\">\n        <button mat-stroked-button routerLink=\"/auth/signup\">Sign up</button>\n    </div>\n</div>\n\n<section class=\"auth-wrapper\">\n    <div class=\"container\">\n        <div class=\"row justify-content-md-center align-items-center\">\n            <div class=\"col-lg-6\">\n                <div class=\"auth-heading\">\n                    <h1>Update Phone Number</h1>\n                    <p>New to Shaale? <a href=\"auth/signup\">Sign Up</a></p>\n                </div>\n                <div class=\"auth-outer\">\n                    <form [formGroup]=\"updatePhoneForm\" (ngSubmit)=\"onSubmit()\">\n                        <div class=\"mat-phone-field\">\n                            <ngx-intl-tel-input [cssClass]=\"'custom-phone-input'\"\n                                [preferredCountries]=\"preferredCountries\" [enableAutoCountrySelect]=\"false\"\n                                [enablePlaceholder]=\"true\" [searchCountryFlag]=\"true\"\n                                [searchCountryField]=\"[SearchCountryField.Iso2, SearchCountryField.Name]\"\n                                [selectFirstCountry]=\"false\" [selectedCountryISO]=\"CountryISO.India\" [maxLength]=\"15\"\n                                [tooltipField]=\"TooltipLabel.Name\" [phoneValidation]=\"true\"\n                                [separateDialCode]=\"separateDialCode\" name=\"phone\" formControlName=\"phone\">\n                            </ngx-intl-tel-input>\n                            <div *ngIf=\"updatePhoneForm.controls['phone'].touched\">\n                                <mat-error *ngIf=\"hasError('phone', 'required')\">Phone is required </mat-error>\n                                <mat-error *ngIf=\"hasError('phone', 'validatePhoneNumber')\">Phone is not valid\n                                </mat-error>\n                            </div>\n                        </div>\n                        <button mat-raised-button class=\"login-button\" [disabled]=\"updatePhoneForm.invalid\">Send OTP</button>\n                    </form>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>");
 
 /***/ }),
 
@@ -846,7 +846,7 @@ __webpack_require__.r(__webpack_exports__);
 const config = new angularx_social_login__WEBPACK_IMPORTED_MODULE_5__["AuthServiceConfig"]([
     {
         id: angularx_social_login__WEBPACK_IMPORTED_MODULE_5__["GoogleLoginProvider"].PROVIDER_ID,
-        provider: new angularx_social_login__WEBPACK_IMPORTED_MODULE_5__["GoogleLoginProvider"]("242880965663-qn8m5e9kfi2s88iegb6kbjmo7rna9ren.apps.googleusercontent.com")
+        provider: new angularx_social_login__WEBPACK_IMPORTED_MODULE_5__["GoogleLoginProvider"]("242880965663-u1gd2hhcl41247f26qds0c5n2f14jk65.apps.googleusercontent.com")
     },
     {
         id: angularx_social_login__WEBPACK_IMPORTED_MODULE_5__["FacebookLoginProvider"].PROVIDER_ID,
@@ -1051,6 +1051,7 @@ let LoginComponent = class LoginComponent {
         this.restApi.loginUser(this.loginForm.value)
             .subscribe((onSuccess) => {
             console.log(onSuccess);
+            this.store.dispatch(Object(_core_core_module__WEBPACK_IMPORTED_MODULE_5__["authLogin"])());
             localStorage.setItem("token", onSuccess.token);
             this.getUserInfo();
         }, (onError) => {
@@ -1062,6 +1063,7 @@ let LoginComponent = class LoginComponent {
         this.restApi.loginUserSocial(socialData)
             .subscribe((onSuccess) => {
             console.log(onSuccess);
+            this.store.dispatch(Object(_core_core_module__WEBPACK_IMPORTED_MODULE_5__["authLogin"])());
             localStorage.setItem("token", onSuccess.token);
             this.getUserInfo();
         }, (onError) => {
@@ -1083,7 +1085,6 @@ let LoginComponent = class LoginComponent {
                 }
             }
             else {
-                this.store.dispatch(Object(_core_core_module__WEBPACK_IMPORTED_MODULE_5__["authLogin"])());
                 this.router.navigateByUrl("/home");
             }
         }, (onError) => {
@@ -1224,6 +1225,7 @@ let SignupComponent = class SignupComponent {
         this.restApi.createUser(this.registerForm.value)
             .subscribe((onSuccess) => {
             console.log(onSuccess);
+            this.store.dispatch(Object(_core_core_module__WEBPACK_IMPORTED_MODULE_6__["authLogin"])());
             localStorage.setItem("token", onSuccess.token);
             this.getUserInfo();
         }, (onError) => {
@@ -1235,6 +1237,7 @@ let SignupComponent = class SignupComponent {
         this.restApi.loginUserSocial(socialData)
             .subscribe((onSuccess) => {
             console.log(onSuccess);
+            this.store.dispatch(Object(_core_core_module__WEBPACK_IMPORTED_MODULE_6__["authLogin"])());
             localStorage.setItem("token", onSuccess.token);
             this.getUserInfo();
         }, (onError) => {
@@ -1256,7 +1259,6 @@ let SignupComponent = class SignupComponent {
                 }
             }
             else {
-                this.store.dispatch(Object(_core_core_module__WEBPACK_IMPORTED_MODULE_6__["authLogin"])());
                 this.router.navigateByUrl("/home");
             }
         }, (onError) => {
@@ -1399,14 +1401,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _shared_rest_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../shared/rest-api.service */ "./src/app/shared/rest-api.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
 
 
 
 
 let VerifyComponent = class VerifyComponent {
-    constructor(formBuilder, restApi) {
+    constructor(formBuilder, restApi, router) {
         this.formBuilder = formBuilder;
         this.restApi = restApi;
+        this.router = router;
         this.hasError = (controlName, errorName) => {
             return this.verifyForm.controls[controlName].hasError(errorName);
         };
@@ -1418,14 +1423,23 @@ let VerifyComponent = class VerifyComponent {
     }
     onSubmit() {
         console.log(this.verifyForm.value);
-        this.restApi.verifyMobile(this.verifyForm.value).subscribe((data) => {
-            console.log('data');
+        let verifyPhone = {
+            code: this.verifyForm.value.otp
+        };
+        this.restApi.verifyMobile(verifyPhone).subscribe((onSuccess) => {
+            console.log(onSuccess);
+            if (onSuccess.status) {
+                this.router.navigateByUrl('/home');
+            }
+        }, (onError) => {
+            console.log(onError);
         });
     }
 };
 VerifyComponent.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
-    { type: _shared_rest_api_service__WEBPACK_IMPORTED_MODULE_3__["RestApiService"] }
+    { type: _shared_rest_api_service__WEBPACK_IMPORTED_MODULE_3__["RestApiService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
 ];
 VerifyComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1435,170 +1449,6 @@ VerifyComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./verify.component.scss */ "./src/app/auth/verify/verify.component.scss")).default]
     })
 ], VerifyComponent);
-
-
-
-/***/ }),
-
-/***/ "./src/app/shared/rest-api.service.ts":
-/*!********************************************!*\
-  !*** ./src/app/shared/rest-api.service.ts ***!
-  \********************************************/
-/*! exports provided: RestApiService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RestApiService", function() { return RestApiService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
-
-
-
-
-
-
-let RestApiService = class RestApiService {
-    // localToken = JSON.parse(localStorage.getItem("token"));
-    constructor(http) {
-        this.http = http;
-        // Define API
-        this.apiURL = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl;
-        /*========================================
-          CRUD Methods for consuming RESTful API
-        =========================================*/
-        /* ===========
-         All Post Method
-        ===================*/
-        // Http Options
-        this.httpOptions = {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-                'Content-Type': 'application/json'
-            })
-        };
-    }
-    // HttpClient API for email signup
-    createUser(newUser) {
-        return this.http.post(this.apiURL + '/auth/signup/email', newUser, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    // HttpClient API for email Login
-    loginUser(newUser) {
-        return this.http.post(this.apiURL + '/auth/login/email', newUser, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    // HttpClient API for social login
-    loginUserSocial(socialUserDetails) {
-        return this.http.post(this.apiURL + '/auth/login/social/' + socialUserDetails.provider, {
-            token: socialUserDetails.token
-        }, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    // HttpClient API for verify email
-    emailVerify(newUser) {
-        return this.http.post(this.apiURL + '/auth/verify/email', newUser, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    // HttpClient API for verify mobile
-    verifyMobile(newUser) {
-        return this.http.post(this.apiURL + '/auth/verify/mobile', newUser, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    // HttpClient API for send mobile otp
-    sendOtp(newUser) {
-        return this.http.post(this.apiURL + '/auth/verify/send-otp', newUser, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    // HttpClient API for send email verification
-    sendEmailVerification(newUser) {
-        return this.http.post(this.apiURL + '/auth/verify/send-otp', newUser, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    purchaseDetails(newUser) {
-        return this.http.post(this.apiURL + '/live/events/by-id/{eventID}/purchase', newUser, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    /* ===========
-    All Put Method
-    ===================*/
-    updatePhone(updateUserDetails) {
-        return this.http.post(this.apiURL + '/auth/me', updateUserDetails, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    updateIsValid(newUser) {
-        return this.http.put(this.apiURL + '/auth/me/sessions/watch/is-valid', newUser, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    /* ===========
-    All Get Method
-    ===================*/
-    // HttpClient API for Forgot Password
-    forgotPassword(data) {
-        return this.http.get(this.apiURL + '/auth/me/forgot-password/' + data, this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    // HttpClient API for User details
-    getUserDetails() {
-        return this.http.get(this.apiURL + '/auth/me', this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    // HttpClient API for Sessions
-    getSessions() {
-        return this.http.get(this.apiURL + '/auth/me/sessions', this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    // HttpClient API for Sessions with id
-    getSessionsWIthID() {
-        return this.http.get(this.apiURL + '/auth/me/sessions/{sessionId}', this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    getIsValid() {
-        return this.http.get(this.apiURL + '/auth/me/sessions/watch/is-valid', this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    getLiveEvents() {
-        return this.http.get(this.apiURL + '/live/events', this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    getLiveEventDetails() {
-        return this.http.get(this.apiURL + '/live/events/by-slug/{eventSlug}', this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    getLiveEventVideo() {
-        return this.http.get(this.apiURL + '/live/events/by-id/{eventID}/video', this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    getCouponCode() {
-        return this.http.get(this.apiURL + '/live/events/by-id/{eventID}/coupons/{couponCode}', this.httpOptions)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["retry"])(1), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError));
-    }
-    // Error handling 
-    handleError(error) {
-        let errorMessage = '';
-        if (error.error instanceof ErrorEvent) {
-            // Get client-side error
-            errorMessage = error.error.message;
-        }
-        else {
-            // Get server-side error
-            errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-        }
-        window.alert(errorMessage);
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["throwError"])(errorMessage);
-    }
-};
-RestApiService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
-];
-RestApiService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    })
-], RestApiService);
 
 
 

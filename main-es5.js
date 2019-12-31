@@ -356,6 +356,7 @@ var __extends = (this && this.__extends) || (function () {
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
             /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
             /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+            /* harmony import */ var _core_auth_logged_in_auth_guard_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./core/auth/logged-in-auth-guard.service */ "./src/app/core/auth/logged-in-auth-guard.service.ts");
             var routes = [
                 // {
                 //   path: 'auth',
@@ -372,8 +373,8 @@ var __extends = (this && this.__extends) || (function () {
                 // },
                 {
                     path: 'auth',
-                    // resolve: [LoggedInAuthGuardService],
-                    loadChildren: function () { return __webpack_require__.e(/*! import() | auth-auth-module */ "auth-auth-module").then(__webpack_require__.bind(null, /*! ./auth/auth.module */ "./src/app/auth/auth.module.ts")).then(function (mod) { return mod.AuthModule; }); }
+                    resolve: [_core_auth_logged_in_auth_guard_service__WEBPACK_IMPORTED_MODULE_3__["LoggedInAuthGuardService"]],
+                    loadChildren: function () { return Promise.all(/*! import() | auth-auth-module */ [__webpack_require__.e("common"), __webpack_require__.e("auth-auth-module")]).then(__webpack_require__.bind(null, /*! ./auth/auth.module */ "./src/app/auth/auth.module.ts")).then(function (mod) { return mod.AuthModule; }); }
                 },
                 {
                     path: '',
@@ -781,6 +782,52 @@ var __extends = (this && this.__extends) || (function () {
             var selectIsAuthenticated = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_1__["createSelector"])(_core_state__WEBPACK_IMPORTED_MODULE_2__["selectAuthState"], function (state) { return state.isAuthenticated; });
             /***/ 
         }),
+        /***/ "./src/app/core/auth/logged-in-auth-guard.service.ts": 
+        /*!***********************************************************!*\
+          !*** ./src/app/core/auth/logged-in-auth-guard.service.ts ***!
+          \***********************************************************/
+        /*! exports provided: LoggedInAuthGuardService */
+        /***/ (function (module, __webpack_exports__, __webpack_require__) {
+            "use strict";
+            __webpack_require__.r(__webpack_exports__);
+            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoggedInAuthGuardService", function () { return LoggedInAuthGuardService; });
+            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+            /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+            /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm2015/store.js");
+            var LoggedInAuthGuardService = /** @class */ (function () {
+                function LoggedInAuthGuardService(store, router) {
+                    this.store = store;
+                    this.router = router;
+                    this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_3__["select"])(function (state) {
+                        console.log(state.auth.isAuthenticated);
+                    }));
+                    // console.log(this.store.isAuthenticated);
+                }
+                LoggedInAuthGuardService.prototype.resolve = function () {
+                    var userLoggedin = JSON.parse(localStorage.getItem('SHAALE-AUTH'));
+                    var userToken = localStorage.getItem('token');
+                    console.log(userToken ? null : userToken);
+                    // if (userLoggedin) {
+                    //   // console.log(userLoggedin.isAuthenticated);
+                    //   // this.router.navigate(['/home']);
+                    // } else {
+                    //   this.router.navigate(['/']);
+                    // }
+                };
+                return LoggedInAuthGuardService;
+            }());
+            LoggedInAuthGuardService.ctorParameters = function () { return [
+                { type: _ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"] },
+                { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+            ]; };
+            LoggedInAuthGuardService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+                Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+                    providedIn: 'root'
+                })
+            ], LoggedInAuthGuardService);
+            /***/ 
+        }),
         /***/ "./src/app/core/core.module.ts": 
         /*!*************************************!*\
           !*** ./src/app/core/core.module.ts ***!
@@ -949,7 +996,11 @@ var __extends = (this && this.__extends) || (function () {
                     return _this;
                 }
                 AppErrorHandler.prototype.handleError = function (error) {
+                    console.log(error.error);
                     var displayMessage = 'An error occurred.';
+                    // if(error.error.error[0] === "ERR_INVALID_CREDENTIALS") {
+                    //   displayMessage =  "Username or password is incorrect";
+                    // }
                     if (!_environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].production) {
                         displayMessage += ' See console for details.';
                     }
@@ -1142,31 +1193,31 @@ var __extends = (this && this.__extends) || (function () {
                 }
                 NotificationService.prototype.default = function (message) {
                     this.show(message, {
-                        duration: 2000,
+                        duration: 9000,
                         panelClass: 'default-notification-overlay'
                     });
                 };
                 NotificationService.prototype.info = function (message) {
                     this.show(message, {
-                        duration: 2000,
+                        duration: 9000,
                         panelClass: 'info-notification-overlay'
                     });
                 };
                 NotificationService.prototype.success = function (message) {
                     this.show(message, {
-                        duration: 2000,
+                        duration: 9000,
                         panelClass: 'success-notification-overlay'
                     });
                 };
                 NotificationService.prototype.warn = function (message) {
                     this.show(message, {
-                        duration: 2500,
+                        duration: 9000,
                         panelClass: 'warning-notification-overlay'
                     });
                 };
                 NotificationService.prototype.error = function (message) {
                     this.show(message, {
-                        duration: 3000,
+                        duration: 9000,
                         panelClass: 'error-notification-overlay'
                     });
                 };
@@ -1599,6 +1650,8 @@ var __extends = (this && this.__extends) || (function () {
                 test: false,
                 i18nPrefix: '',
                 apiUrl: 'https://api-dot-shaale-one-development.appspot.com',
+                key: 'rzp_test_jFui24YVVwpzMD',
+                key_secret: 'ViqSfxlK2HaXta2D9fwLpdF0',
             };
             /*
              * For easier debugging in development mode, you can import the following file

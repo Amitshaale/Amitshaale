@@ -768,32 +768,32 @@
                     this.router = router;
                     this.videos = [
                         {
-                            img: 'assets/img/organisation/video-poster-1.jpg',
+                            img: 'assets/img/placeholder.png',
                             name: 'Rationalist s dramas and comedies of social suffering ',
                             description: 'GIPA'
                         },
                         {
-                            img: 'assets/img/organisation/video-poster-2.jpg',
+                            img: 'assets/img/placeholder.png',
                             name: 'naraharikaviya torave ramayanada reading- definition program',
                             description: 'GIPA'
                         },
                         {
-                            img: 'assets/img/organisation/video-poster-3.jpg',
+                            img: 'assets/img/placeholder.png',
                             name: 'd. V. G. Literary Awakening - Dr. R. Ganesh',
                             description: 'GIPA'
                         },
                         {
-                            img: 'assets/img/organisation/video-poster-2.jpg',
+                            img: 'assets/img/placeholder.png',
                             name: 'naraharikaviya torave ramayanada reading- definition program',
                             description: 'GIPA'
                         },
                         {
-                            img: 'assets/img/organisation/video-poster-3.jpg',
+                            img: 'assets/img/placeholder.png',
                             name: 'd. V. G. Literary Awakening - Dr. R. Ganesh',
                             description: 'GIPA'
                         },
                         {
-                            img: 'assets/img/live/rectangle.png',
+                            img: 'assets/img/placeholder.png',
                             name: 'd. V. G. Literary Awakening - Dr. R. Ganesh',
                             description: 'GIPA'
                         }
