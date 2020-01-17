@@ -3596,7 +3596,7 @@ const routes = [
     },
     {
         path: 'organisation',
-        loadChildren: () => Promise.all(/*! import() | organisation-organisation-module */[__webpack_require__.e("default~library-library-module~organisation-organisation-module"), __webpack_require__.e("organisation-organisation-module")]).then(__webpack_require__.bind(null, /*! ../organisation/organisation.module */ "./src/app/products/organisation/organisation.module.ts")).then(mod => mod.OrganisationModule)
+        loadChildren: () => Promise.all(/*! import() | organisation-organisation-module */[__webpack_require__.e("default~library-library-module~live-live-module~organisation-organisation-module"), __webpack_require__.e("organisation-organisation-module")]).then(__webpack_require__.bind(null, /*! ../organisation/organisation.module */ "./src/app/products/organisation/organisation.module.ts")).then(mod => mod.OrganisationModule)
     },
 ];
 let LibraryRoutingModule = class LibraryRoutingModule {

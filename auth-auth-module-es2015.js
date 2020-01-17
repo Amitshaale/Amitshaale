@@ -680,7 +680,7 @@ FacebookLoginProvider.PROVIDER_ID = 'FACEBOOK';
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"auth-header\">\n    <div class=\"header-inner\">\n        <img src=\"assets/img/logo.png\" routerLink=\"/\">\n        <button mat-stroked-button routerLink=\"/auth/signup\">Sign up</button>\n    </div>\n</div>\n\n<section class=\"auth-wrapper\">\n    <div class=\"container\">\n        <div class=\"row justify-content-md-center align-items-center\">\n            <div class=\"col-lg-6\">\n                <div class=\"auth-heading\">\n                    <h1>Forgot Password</h1>\n                    <p>You will get reset password link in your email</p>\n                </div>\n                <div class=\"auth-outer\">\n                    <form [formGroup]=\"forgotPasswordForm\" (ngSubmit)=\"onSubmit()\">\n                        <mat-form-field appearance=\"outline\">\n                            <mat-label>Email ID</mat-label>\n                            <input matInput formControlName=\"email\" placeholder=\"Enter your Email ID\" required>\n                            <mat-icon matSuffix>email</mat-icon>\n                            <mat-error *ngIf=\"hasError('email', 'required')\">Email is required</mat-error>\n                            <mat-error *ngIf=\"hasError('email', 'email')\">Email is not valid</mat-error>\n                        </mat-form-field>\n                        <button mat-raised-button class=\"login-button\" [disabled]=\"forgotPasswordForm.invalid\">Submit</button>\n                    </form>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"auth-header\">\n    <div class=\"header-inner\">\n        <img src=\"assets/img/logo.png\" routerLink=\"/\">\n        <button mat-stroked-button routerLink=\"/auth/signup\">Sign up</button>\n    </div>\n</div>\n\n<section class=\"auth-wrapper\">\n    <div class=\"container\">\n        <div class=\"row justify-content-md-center align-items-center\">\n            <div class=\"col-lg-6\">\n                <div class=\"auth-heading\">\n                    <h1>Forgot Password</h1>\n                    <p>You will get reset password link in your email</p>\n                </div>\n                <div class=\"auth-outer\">\n                    <form [formGroup]=\"forgotPasswordForm\" (ngSubmit)=\"onSubmit()\">\n                        <mat-form-field appearance=\"outline\">\n                            <mat-label>Email ID</mat-label>\n                            <input matInput formControlName=\"email\" placeholder=\"Enter your Email ID\" required>\n                            <mat-icon matSuffix>email</mat-icon>\n                            <mat-error *ngIf=\"hasError('email', 'required')\">Email is required</mat-error>\n                            <mat-error *ngIf=\"hasError('email', 'email')\">Email is not valid</mat-error>\n                        </mat-form-field>\n                        <button mat-raised-button class=\"login-button\" [disabled]=\"forgotPasswordForm.invalid || isLoading\">\n                            <i class=\"fa\" [ngClass]=\"{'fa-spin fa-spinner': isLoading}\"></i>\n                            {{ button }}\n                        </button>\n                    </form>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>");
 
 /***/ }),
 
@@ -693,7 +693,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"auth-header\">\n    <div class=\"header-inner\">\n        <img src=\"assets/img/logo.png\" routerLink=\"/\">\n        <button mat-stroked-button routerLink=\"/auth/signup\">Sign up</button>\n    </div>\n</div>\n<section class=\"auth-wrapper\">\n    <div class=\"container\">\n        <div class=\"row justify-content-md-center align-items-center\">\n            <div class=\"col-lg-8\">\n                <div class=\"auth-heading\">\n                    <h1>Log In</h1>\n                    <p>New to Shaale? <a href=\"#\" routerLink=\"/auth/signup\">Sign Up</a></p>\n                </div>\n                <div class=\"auth-outer\">\n                    <div class=\"row justify-content-md-center align-items-center\">\n                        <div class=\"col-md-6 form-section\">\n                            <form [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\n                                <mat-form-field appearance=\"outline\">\n                                    <mat-label>Email ID</mat-label>\n                                    <input matInput formControlName=\"email\" placeholder=\"Enter your Email ID\" required>\n                                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>\n                                    <mat-error *ngIf=\"hasError('email', 'required')\">Email is required</mat-error>\n                                    <mat-error *ngIf=\"hasError('email', 'email')\">Email is not valid</mat-error>\n                                </mat-form-field>\n                                <mat-form-field appearance=\"outline\">\n                                    <mat-label>Password</mat-label>\n                                    <input matInput placeholder=\"Enter your password\"\n                                        [type]=\"hide ? 'password' : 'text'\" formControlName=\"password\" required>\n                                    <mat-error *ngIf=\"hasError('password', 'required')\">Password is required</mat-error>\n                                    <mat-error *ngIf=\"hasError('password', 'minlength')\">Password is not valid\n                                    </mat-error>\n                                    <mat-error *ngIf=\"hasError('password', 'pattern')\">Valid characters are A-Z a-z 0-9\n                                        . _ -.</mat-error>\n                                    <button mat-icon-button type=\"button\" matSuffix (click)=\"hide = !hide\"\n                                        [attr.aria-label]=\"'Hide password'\" [attr.aria-pressed]=\"hide\">\n                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>\n                                    </button>\n                                </mat-form-field>\n                                <p class=\"forgot-password\"><a routerLink=\"/auth/forgot-password\">Forgot password?</a></p>\n                                <button mat-raised-button class=\"login-button\" [disabled]=\"loginForm.invalid\">Log\n                                    in</button>\n                            </form>\n                        </div>\n                        <div class=\"col-md-6 social-section\">\n                            <button mat-raised-button class=\"google-login-button\" (click)=\"signInWithGoogle()\">\n                                <img src=\"assets/img/icons/social-google.png\">\n                                Continue with Google\n                            </button>\n                            <button mat-raised-button class=\"facebook-login-button\" (click)=\"signInWithFB()\">\n                                <img src=\"assets/img/icons/social-facebook.png\">\n                                Continue with Facebook\n                            </button>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"auth-header\">\n    <div class=\"header-inner\">\n        <img src=\"assets/img/logo.png\" routerLink=\"/\">\n        <button mat-stroked-button routerLink=\"/auth/signup\">Sign up</button>\n    </div>\n</div>\n<section class=\"auth-wrapper\">\n    <div class=\"container\">\n        <div class=\"row justify-content-md-center align-items-center\">\n            <div class=\"col-lg-8\">\n                <div class=\"auth-heading\">\n                    <h1>Log In</h1>\n                    <p>New to Shaale? <a href=\"#\" routerLink=\"/auth/signup\">Sign Up</a></p>\n                </div>\n                <div class=\"auth-outer\">\n                    <div class=\"row justify-content-md-center align-items-center\">\n                        <div class=\"col-md-6 form-section\">\n                            <form [formGroup]=\"loginForm\" (ngSubmit)=\"onSubmit()\">\n                                <mat-form-field appearance=\"outline\">\n                                    <mat-label>Email ID</mat-label>\n                                    <input matInput formControlName=\"email\" placeholder=\"Enter your Email ID\" required>\n                                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>\n                                    <mat-error *ngIf=\"hasError('email', 'required')\">Email is required</mat-error>\n                                    <mat-error *ngIf=\"hasError('email', 'email')\">Email is not valid</mat-error>\n                                </mat-form-field>\n                                <mat-form-field appearance=\"outline\">\n                                    <mat-label>Password</mat-label>\n                                    <input matInput placeholder=\"Enter your password\"\n                                        [type]=\"hide ? 'password' : 'text'\" formControlName=\"password\" required>\n                                    <mat-error *ngIf=\"hasError('password', 'required')\">Password is required</mat-error>\n                                    <mat-error *ngIf=\"hasError('password', 'minlength')\">Password is not valid\n                                    </mat-error>\n                                    <mat-error *ngIf=\"hasError('password', 'pattern')\">Valid characters are A-Z a-z 0-9\n                                        . _ -.</mat-error>\n                                    <button mat-icon-button type=\"button\" matSuffix (click)=\"hide = !hide\"\n                                        [attr.aria-label]=\"'Hide password'\" [attr.aria-pressed]=\"hide\">\n                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>\n                                    </button>\n                                </mat-form-field>\n                                <p class=\"forgot-password\"><a routerLink=\"/auth/forgot-password\">Forgot password?</a></p>\n                                <button mat-raised-button class=\"login-button\" [disabled]=\"loginForm.invalid || isLoading\">\n                                    <i class=\"fa\" [ngClass]=\"{'fa-spin fa-spinner': isLoading}\"></i>\n                                    {{ button }}\n                                </button>\n                            </form>\n                        </div>\n                        <div class=\"col-md-6 social-section\">\n                            <button mat-raised-button class=\"google-login-button\" (click)=\"signInWithGoogle()\">\n                                <img src=\"assets/img/icons/social-google.png\">\n                                Continue with Google\n                            </button>\n                            <button mat-raised-button class=\"facebook-login-button\" (click)=\"signInWithFB()\">\n                                <img src=\"assets/img/icons/social-facebook.png\">\n                                Continue with Facebook\n                            </button>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>");
 
 /***/ }),
 
@@ -706,7 +706,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"auth-header\">\n    <div class=\"header-inner\">\n        <img src=\"assets/img/logo.png\" routerLink=\"/\">\n        <button mat-stroked-button routerLink=\"/auth/login\">Log in</button>\n    </div>\n</div>\n<section class=\"auth-wrapper\">\n    <div class=\"container\">\n        <div class=\"row justify-content-md-center align-items-center\">\n            <div class=\"col-lg-8\">\n                <div class=\"auth-heading\">\n                    <h1>Sign up</h1>\n                    <p>Already have a Shaale account? <a href=\"#\" routerLink=\"/auth/login\">Log In</a></p>\n                </div>\n                <div class=\"auth-outer\">\n                    <div class=\"row justify-content-md-center align-items-center\">\n                        <div class=\"col-md-6 form-section\">\n                            <form [formGroup]=\"registerForm\" (ngSubmit)=\"onSubmit()\">\n                                <mat-form-field appearance=\"outline\">\n                                    <mat-label>Name</mat-label>\n                                    <input matInput formControlName=\"name\" placeholder=\"Enter your Name\" required>\n                                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>\n                                    <mat-error *ngIf=\"hasError('name', 'required')\">Name is required</mat-error>\n                                    <mat-error *ngIf=\"hasError('name', 'pattern')\">Name is not valid</mat-error>\n                                </mat-form-field>\n                                <mat-form-field appearance=\"outline\">\n                                    <mat-label>Email ID</mat-label>\n                                    <input matInput formControlName=\"email\" placeholder=\"Enter your Email ID\" required>\n                                    <mat-icon matSuffix>email</mat-icon>\n                                    <mat-error *ngIf=\"hasError('email', 'required')\">Email is required</mat-error>\n                                    <mat-error *ngIf=\"hasError('email', 'email')\">Email is not valid</mat-error>\n                                </mat-form-field>\n                                <div class=\"mat-phone-field\">\n                                    <ngx-intl-tel-input [cssClass]=\"'custom-phone-input'\"\n                                        [preferredCountries]=\"preferredCountries\" [enableAutoCountrySelect]=\"false\"\n                                        [enablePlaceholder]=\"true\" [searchCountryFlag]=\"true\"\n                                        [searchCountryField]=\"[SearchCountryField.Iso2, SearchCountryField.Name]\"\n                                        [selectFirstCountry]=\"false\" [selectedCountryISO]=\"CountryISO.India\"\n                                        [maxLength]=\"15\" [tooltipField]=\"TooltipLabel.Name\" [phoneValidation]=\"true\"\n                                        [separateDialCode]=\"separateDialCode\" name=\"phone\" formControlName=\"phone\">\n                                    </ngx-intl-tel-input>\n                                    <div *ngIf=\"registerForm.controls['phone'].touched\">\n                                        <mat-error *ngIf=\"hasError('phone', 'required')\">Phone is required </mat-error>\n                                        <mat-error *ngIf=\"hasError('phone', 'validatePhoneNumber')\">Phone is not valid\n                                        </mat-error>\n                                    </div>\n                                </div>\n                                <mat-form-field appearance=\"outline\">\n                                    <mat-label>Password</mat-label>\n                                    <input matInput formControlName=\"password\" placeholder=\"Enter your password\"\n                                        [type]=\"hide ? 'password' : 'text'\" required>\n                                    <button mat-icon-button matSuffix type=\"button\" (click)=\"hide = !hide\"\n                                        [attr.aria-label]=\"'Hide password'\" [attr.aria-pressed]=\"hide\">\n                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>\n                                    </button>\n                                    <mat-error *ngIf=\"hasError('password', 'required')\">Password is required</mat-error>\n                                    <mat-error *ngIf=\"hasError('password', 'minlength')\">Password is not valid\n                                    </mat-error>\n                                    <mat-error *ngIf=\"hasError('password', 'pattern')\">Valid characters are A-Z a-z 0-9\n                                        . _ -.</mat-error>\n                                </mat-form-field>\n                                <button mat-raised-button class=\"login-button\" [disabled]=\"registerForm.invalid\">Sign\n                                    up</button>\n                            </form>\n                        </div>\n                        <div class=\"col-md-6 social-section\">\n                            <button mat-raised-button class=\"google-login-button\" (click)=\"signInWithGoogle()\">\n                                <img src=\"assets/img/icons/social-google.png\">\n                                Continue with Google\n                            </button>\n                            <button mat-raised-button class=\"facebook-login-button\" (click)=\"signInWithFB()\">\n                                <img src=\"assets/img/icons/social-facebook.png\">\n                                Continue with Facebook\n                            </button>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"auth-header\">\n    <div class=\"header-inner\">\n        <img src=\"assets/img/logo.png\" routerLink=\"/\">\n        <button mat-stroked-button routerLink=\"/auth/login\">Log in</button>\n    </div>\n</div>\n<section class=\"auth-wrapper\">\n    <div class=\"container\">\n        <div class=\"row justify-content-md-center align-items-center\">\n            <div class=\"col-lg-8\">\n                <div class=\"auth-heading\">\n                    <h1>Sign up</h1>\n                    <p>Already have a Shaale account? <a href=\"#\" routerLink=\"/auth/login\">Log In</a></p>\n                </div>\n                <div class=\"auth-outer\">\n                    <div class=\"row justify-content-md-center align-items-center\">\n                        <div class=\"col-md-6 form-section\">\n                            <form [formGroup]=\"registerForm\" (ngSubmit)=\"onSubmit()\">\n                                <mat-form-field appearance=\"outline\">\n                                    <mat-label>Name</mat-label>\n                                    <input matInput formControlName=\"name\" placeholder=\"Enter your Name\" required>\n                                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>\n                                    <mat-error *ngIf=\"hasError('name', 'required')\">Name is required</mat-error>\n                                    <mat-error *ngIf=\"hasError('name', 'pattern')\">Name is not valid</mat-error>\n                                </mat-form-field>\n                                <mat-form-field appearance=\"outline\">\n                                    <mat-label>Email ID</mat-label>\n                                    <input matInput formControlName=\"email\" placeholder=\"Enter your Email ID\" required>\n                                    <mat-icon matSuffix>email</mat-icon>\n                                    <mat-error *ngIf=\"hasError('email', 'required')\">Email is required</mat-error>\n                                    <mat-error *ngIf=\"hasError('email', 'email')\">Email is not valid</mat-error>\n                                </mat-form-field>\n                                <div class=\"mat-phone-field\">\n                                    <ngx-intl-tel-input [cssClass]=\"'custom-phone-input'\"\n                                        [preferredCountries]=\"preferredCountries\" [enableAutoCountrySelect]=\"false\"\n                                        [enablePlaceholder]=\"true\" [searchCountryFlag]=\"true\"\n                                        [searchCountryField]=\"[SearchCountryField.Iso2, SearchCountryField.Name]\"\n                                        [selectFirstCountry]=\"false\" [selectedCountryISO]=\"CountryISO.India\"\n                                        [maxLength]=\"15\" [tooltipField]=\"TooltipLabel.Name\" [phoneValidation]=\"true\"\n                                        [separateDialCode]=\"separateDialCode\" name=\"phone\" formControlName=\"phone\">\n                                    </ngx-intl-tel-input>\n                                    <div *ngIf=\"registerForm.controls['phone'].touched\">\n                                        <mat-error *ngIf=\"hasError('phone', 'required')\">Phone is required </mat-error>\n                                        <mat-error *ngIf=\"hasError('phone', 'validatePhoneNumber')\">Phone is not valid\n                                        </mat-error>\n                                    </div>\n                                </div>\n                                <mat-form-field appearance=\"outline\">\n                                    <mat-label>Password</mat-label>\n                                    <input matInput formControlName=\"password\" placeholder=\"Enter your password\"\n                                        [type]=\"hide ? 'password' : 'text'\" required>\n                                    <button mat-icon-button matSuffix type=\"button\" (click)=\"hide = !hide\"\n                                        [attr.aria-label]=\"'Hide password'\" [attr.aria-pressed]=\"hide\">\n                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>\n                                    </button>\n                                    <mat-error *ngIf=\"hasError('password', 'required')\">Password is required</mat-error>\n                                    <mat-error *ngIf=\"hasError('password', 'minlength')\">Password is not valid\n                                    </mat-error>\n                                    <mat-error *ngIf=\"hasError('password', 'pattern')\">Valid characters are A-Z a-z 0-9\n                                        . _ -.</mat-error>\n                                </mat-form-field>\n                                <button mat-raised-button class=\"login-button\" [disabled]=\"registerForm.invalid || isLoading\">\n                                    <i class=\"fa\" [ngClass]=\"{'fa-spin fa-spinner': isLoading}\"></i>\n                                    {{ button }}\n                                </button>\n                            </form>\n                        </div>\n                        <div class=\"col-md-6 social-section\">\n                            <button mat-raised-button class=\"google-login-button\" (click)=\"signInWithGoogle()\">\n                                <img src=\"assets/img/icons/social-google.png\">\n                                Continue with Google\n                            </button>\n                            <button mat-raised-button class=\"facebook-login-button\" (click)=\"signInWithFB()\">\n                                <img src=\"assets/img/icons/social-facebook.png\">\n                                Continue with Facebook\n                            </button>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>");
 
 /***/ }),
 
@@ -719,7 +719,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"auth-header\">\n    <div class=\"header-inner\">\n        <img src=\"assets/img/logo.png\" routerLink=\"/\">\n        <button mat-stroked-button routerLink=\"/auth/signup\">Sign up</button>\n    </div>\n</div>\n\n<section class=\"auth-wrapper\">\n    <div class=\"container\">\n        <div class=\"row justify-content-md-center align-items-center\">\n            <div class=\"col-lg-6\">\n                <div class=\"auth-heading\">\n                    <h1>Update Phone Number</h1>\n                    <p>New to Shaale? <a href=\"auth/signup\">Sign Up</a></p>\n                </div>\n                <div class=\"auth-outer\">\n                    <form [formGroup]=\"updatePhoneForm\" (ngSubmit)=\"onSubmit()\">\n                        <div class=\"mat-phone-field\">\n                            <ngx-intl-tel-input [cssClass]=\"'custom-phone-input'\"\n                                [preferredCountries]=\"preferredCountries\" [enableAutoCountrySelect]=\"false\"\n                                [enablePlaceholder]=\"true\" [searchCountryFlag]=\"true\"\n                                [searchCountryField]=\"[SearchCountryField.Iso2, SearchCountryField.Name]\"\n                                [selectFirstCountry]=\"false\" [selectedCountryISO]=\"CountryISO.India\" [maxLength]=\"15\"\n                                [tooltipField]=\"TooltipLabel.Name\" [phoneValidation]=\"true\"\n                                [separateDialCode]=\"separateDialCode\" name=\"phone\" formControlName=\"phone\">\n                            </ngx-intl-tel-input>\n                            <div *ngIf=\"updatePhoneForm.controls['phone'].touched\">\n                                <mat-error *ngIf=\"hasError('phone', 'required')\">Phone is required </mat-error>\n                                <mat-error *ngIf=\"hasError('phone', 'validatePhoneNumber')\">Phone is not valid\n                                </mat-error>\n                            </div>\n                        </div>\n                        <button mat-raised-button class=\"login-button\" [disabled]=\"updatePhoneForm.invalid\">Send OTP</button>\n                    </form>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"auth-header\">\n    <div class=\"header-inner\">\n        <img src=\"assets/img/logo.png\" routerLink=\"/\">\n        <button mat-stroked-button routerLink=\"/auth/signup\">Sign up</button>\n    </div>\n</div>\n\n<section class=\"auth-wrapper\">\n    <div class=\"container\">\n        <div class=\"row justify-content-md-center align-items-center\">\n            <div class=\"col-lg-6\">\n                <div class=\"auth-heading\">\n                    <h1>Update Phone Number</h1>\n                    <p>New to Shaale? <a href=\"auth/signup\">Sign Up</a></p>\n                </div>\n                <div class=\"auth-outer\">\n                    <form [formGroup]=\"updatePhoneForm\" (ngSubmit)=\"onSubmit()\">\n                        <div class=\"mat-phone-field\">\n                            <ngx-intl-tel-input [cssClass]=\"'custom-phone-input'\"\n                                [preferredCountries]=\"preferredCountries\" [enableAutoCountrySelect]=\"false\"\n                                [enablePlaceholder]=\"true\" [searchCountryFlag]=\"true\"\n                                [searchCountryField]=\"[SearchCountryField.Iso2, SearchCountryField.Name]\"\n                                [selectFirstCountry]=\"false\" [selectedCountryISO]=\"CountryISO.India\" [maxLength]=\"15\"\n                                [tooltipField]=\"TooltipLabel.Name\" [phoneValidation]=\"true\"\n                                [separateDialCode]=\"separateDialCode\" name=\"phone\" formControlName=\"phone\">\n                            </ngx-intl-tel-input>\n                            <div *ngIf=\"updatePhoneForm.controls['phone'].touched\">\n                                <mat-error *ngIf=\"hasError('phone', 'required')\">Phone is required </mat-error>\n                                <mat-error *ngIf=\"hasError('phone', 'validatePhoneNumber')\">Phone is not valid\n                                </mat-error>\n                            </div>\n                        </div>\n                        <button mat-raised-button class=\"login-button\" [disabled]=\"updatePhoneForm.invalid || isLoading\">\n                            <i class=\"fa\" [ngClass]=\"{'fa-spin fa-spinner': isLoading}\"></i>\n                            {{ button }}\n                        </button>\n                    </form>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>");
 
 /***/ }),
 
@@ -732,7 +732,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"auth-header\">\n    <div class=\"header-inner\">\n        <img src=\"assets/img/logo.png\" routerLink=\"/\">\n        <button mat-stroked-button routerLink=\"/auth/signup\">Sign up</button>\n    </div>\n</div>\n\n<section class=\"auth-wrapper\">\n    <div class=\"container\">\n        <div class=\"row justify-content-md-center align-items-center\">\n            <div class=\"col-lg-6\">\n                <div class=\"auth-heading\">\n                    <h1>Verify Phone Number</h1>\n                    <p>Didn't receive OTP? <a>Resend</a></p>\n                </div>\n                <div class=\"auth-outer\">\n                    <form [formGroup]=\"verifyForm\" (ngSubmit)=\"onSubmit()\">\n                        <mat-form-field appearance=\"outline\">\n                            <mat-label>Enter OTP</mat-label>\n                            <input matInput formControlName=\"otp\" placeholder=\"Enter OTP\" required>\n                            <mat-icon matSuffix>verified_user</mat-icon>\n                            <mat-error *ngIf=\"hasError('otp', 'required')\">OTP is required</mat-error>\n                            <mat-error *ngIf=\"hasError('otp', 'minlength')\">OTP is not valid</mat-error>\n                        </mat-form-field>\n                        <button mat-raised-button class=\"login-button\" [disabled]=\"verifyForm.invalid\">Submit</button>\n                    </form>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"auth-header\">\n    <div class=\"header-inner\">\n        <img src=\"assets/img/logo.png\" routerLink=\"/\">\n        <button mat-stroked-button routerLink=\"/auth/signup\">Sign up</button>\n    </div>\n</div>\n\n<section class=\"auth-wrapper\">\n    <div class=\"container\">\n        <div class=\"row justify-content-md-center align-items-center\">\n            <div class=\"col-lg-6\">\n                <div class=\"auth-heading\">\n                    <h1>Verify Phone Number</h1>\n                    <p>Didn't receive OTP? <a>Resend</a></p>\n                </div>\n                <div class=\"auth-outer\">\n                    <form [formGroup]=\"verifyForm\" (ngSubmit)=\"onSubmit()\">\n                        <mat-form-field appearance=\"outline\">\n                            <mat-label>Enter OTP</mat-label>\n                            <input matInput formControlName=\"otp\" placeholder=\"Enter OTP\" required>\n                            <mat-icon matSuffix>verified_user</mat-icon>\n                            <mat-error *ngIf=\"hasError('otp', 'required')\">OTP is required</mat-error>\n                            <mat-error *ngIf=\"hasError('otp', 'minlength')\">OTP is not valid</mat-error>\n                        </mat-form-field>\n                        <button mat-raised-button class=\"login-button\" [disabled]=\"verifyForm.invalid || isLoading\">\n                            <i class=\"fa\" [ngClass]=\"{'fa-spin fa-spinner': isLoading}\"></i>\n                            {{ button }}\n                        </button>\n                    </form>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>");
 
 /***/ }),
 
@@ -920,6 +920,8 @@ let ForgotPasswordComponent = class ForgotPasswordComponent {
         this.formBuilder = formBuilder;
         this.restApi = restApi;
         this.router = router;
+        this.button = 'Submit';
+        this.isLoading = false;
         this.hasError = (controlName, errorName) => {
             return this.forgotPasswordForm.controls[controlName].hasError(errorName);
         };
@@ -931,12 +933,16 @@ let ForgotPasswordComponent = class ForgotPasswordComponent {
     }
     onSubmit() {
         console.log(this.forgotPasswordForm.value);
+        this.button = 'Please wait...';
+        this.isLoading = true;
         this.restApi.forgotPassword(this.forgotPasswordForm.value.email)
             .subscribe((onSuccess) => {
             console.log(onSuccess);
             this.router.navigateByUrl('/auth/login');
         }, (onError) => {
             console.log(onError);
+            this.button = 'Submit';
+            this.isLoading = false;
         });
     }
 };
@@ -1005,6 +1011,8 @@ let LoginComponent = class LoginComponent {
         this.store = store;
         this.router = router;
         this.hide = true;
+        this.button = 'Log in';
+        this.isLoading = false;
         this.hasError = (controlName, errorName) => {
             return this.loginForm.controls[controlName].hasError(errorName);
         };
@@ -1048,6 +1056,8 @@ let LoginComponent = class LoginComponent {
     // login form submit
     onSubmit() {
         console.log(this.loginForm.value);
+        this.isLoading = true;
+        this.button = 'Please wait...';
         this.restApi.loginUser(this.loginForm.value)
             .subscribe((onSuccess) => {
             console.log(onSuccess);
@@ -1055,6 +1065,8 @@ let LoginComponent = class LoginComponent {
             localStorage.setItem("token", onSuccess.token);
             this.getUserInfo();
         }, (onError) => {
+            this.isLoading = false;
+            this.button = 'Log in';
             console.log(onError);
         });
     }
@@ -1074,20 +1086,19 @@ let LoginComponent = class LoginComponent {
     getUserInfo() {
         this.restApi.getUserDetails()
             .subscribe((onSuccess) => {
-            console.log(onSuccess);
+            // console.log(onSuccess);
+            this.isLoading = false;
+            this.button = 'Log in';
+            localStorage.setItem('loggedinUserData', JSON.stringify(onSuccess));
             if (onSuccess.isPhoneVerified == false) {
-                if ((onSuccess.phone == "") || (onSuccess.phone == null)) {
-                    console.log(onSuccess.phone != "", onSuccess.phone != null);
-                    this.router.navigateByUrl("/auth/update-phone");
-                }
-                else {
-                    this.router.navigateByUrl("/auth/verify");
-                }
+                this.router.navigateByUrl("/auth/update-phone");
             }
             else {
                 this.router.navigateByUrl("/home");
             }
         }, (onError) => {
+            this.isLoading = false;
+            this.button = 'Log in';
             console.log(onError);
         });
     }
@@ -1173,6 +1184,8 @@ let SignupComponent = class SignupComponent {
         this.CountryISO = ngx_intl_tel_input__WEBPACK_IMPORTED_MODULE_3__["CountryISO"];
         this.preferredCountries = [ngx_intl_tel_input__WEBPACK_IMPORTED_MODULE_3__["CountryISO"].India];
         this.hide = true;
+        this.isLoading = false;
+        this.button = 'Sign up';
         this.hasError = (controlName, errorName) => {
             return this.registerForm.controls[controlName].hasError(errorName);
         };
@@ -1218,6 +1231,8 @@ let SignupComponent = class SignupComponent {
     // signup form submit
     onSubmit() {
         console.log(this.registerForm.value);
+        this.isLoading = true;
+        this.button = 'Please wait...';
         let phoneFormat = this.registerForm.value.phone.internationalNumber.replace(/[- )(]/g, '');
         console.log(phoneFormat);
         this.registerForm.value.name = this.registerForm.value.name.trim();
@@ -1230,6 +1245,8 @@ let SignupComponent = class SignupComponent {
             this.getUserInfo();
         }, (onError) => {
             console.log(onError);
+            this.isLoading = false;
+            this.button = 'Sign up';
         });
     }
     // social login/signup
@@ -1249,6 +1266,9 @@ let SignupComponent = class SignupComponent {
         this.restApi.getUserDetails()
             .subscribe((onSuccess) => {
             console.log(onSuccess);
+            this.isLoading = false;
+            this.button = 'Sign up';
+            localStorage.setItem('loggedinUserData', JSON.stringify(onSuccess));
             if (onSuccess.isPhoneVerified == false) {
                 if ((onSuccess.phone == "") || (onSuccess.phone == null)) {
                     console.log(onSuccess.phone != "", onSuccess.phone != null);
@@ -1263,6 +1283,8 @@ let SignupComponent = class SignupComponent {
             }
         }, (onError) => {
             console.log(onError);
+            this.isLoading = false;
+            this.button = 'Sign up';
         });
     }
 };
@@ -1330,6 +1352,8 @@ let UpdatePhoneComponent = class UpdatePhoneComponent {
         this.TooltipLabel = ngx_intl_tel_input__WEBPACK_IMPORTED_MODULE_3__["TooltipLabel"];
         this.CountryISO = ngx_intl_tel_input__WEBPACK_IMPORTED_MODULE_3__["CountryISO"];
         this.preferredCountries = [ngx_intl_tel_input__WEBPACK_IMPORTED_MODULE_3__["CountryISO"].India];
+        this.isLoading = false;
+        this.button = 'Send OTP';
         this.hasError = (controlName, errorName) => {
             return this.updatePhoneForm.controls[controlName].hasError(errorName);
         };
@@ -1344,6 +1368,8 @@ let UpdatePhoneComponent = class UpdatePhoneComponent {
     }
     onSubmit() {
         console.log(this.updatePhoneForm.value);
+        this.isLoading = true;
+        this.button = 'Please wait...';
         // let phoneFormat = this.updatePhoneForm.value.phone.dialCode.concat('-', this.updatePhoneForm.value.phone.number);
         let phoneFormat = this.updatePhoneForm.value.phone.internationalNumber.replace(/[- )(]/g, '');
         console.log(phoneFormat);
@@ -1353,6 +1379,8 @@ let UpdatePhoneComponent = class UpdatePhoneComponent {
             this.router.navigateByUrl('/auth/verify');
         }, (onError) => {
             console.log(onError);
+            this.isLoading = false;
+            this.button = 'Send OTP';
         });
     }
 };
@@ -1412,6 +1440,8 @@ let VerifyComponent = class VerifyComponent {
         this.formBuilder = formBuilder;
         this.restApi = restApi;
         this.router = router;
+        this.button = 'Verify';
+        this.isLoading = false;
         this.hasError = (controlName, errorName) => {
             return this.verifyForm.controls[controlName].hasError(errorName);
         };
@@ -1423,6 +1453,8 @@ let VerifyComponent = class VerifyComponent {
     }
     onSubmit() {
         console.log(this.verifyForm.value);
+        this.button = 'Please wait...';
+        this.isLoading = true;
         let verifyPhone = {
             code: this.verifyForm.value.otp
         };
@@ -1433,6 +1465,8 @@ let VerifyComponent = class VerifyComponent {
             }
         }, (onError) => {
             console.log(onError);
+            this.button = 'Verify';
+            this.isLoading = false;
         });
     }
 };

@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"common":"common","auth-auth-module":"auth-auth-module","products-products-module":"products-products-module","abhyas-abhyas-module":"abhyas-abhyas-module","account-account-module":"account-account-module","live-live-module":"live-live-module","connect-connect-module":"connect-connect-module","default~library-library-module~organisation-organisation-module":"default~library-library-module~organisation-organisation-module","library-library-module":"library-library-module","organisation-organisation-module":"organisation-organisation-module","learn-learn-module":"learn-learn-module","legal-legal-module":"legal-legal-module"}[chunkId]||chunkId) +    "-es5.js"
+/******/ 		return __webpack_require__.p + "" + ({"auth-auth-module":"auth-auth-module","products-products-module":"products-products-module","abhyas-abhyas-module":"abhyas-abhyas-module","account-account-module":"account-account-module","connect-connect-module":"connect-connect-module","default~library-library-module~live-live-module~organisation-organisation-module":"default~library-library-module~live-live-module~organisation-organisation-module","library-library-module":"library-library-module","live-live-module":"live-live-module","organisation-organisation-module":"organisation-organisation-module","learn-learn-module":"learn-learn-module","legal-legal-module":"legal-legal-module"}[chunkId]||chunkId) +    "-es5.js"
 /******/ 	}
 /******/
 /******/ 	// The require function

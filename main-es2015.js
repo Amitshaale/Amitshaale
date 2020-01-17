@@ -300,7 +300,7 @@ const routes = [
     {
         path: 'auth',
         resolve: [_core_auth_logged_in_auth_guard_service__WEBPACK_IMPORTED_MODULE_3__["LoggedInAuthGuardService"]],
-        loadChildren: () => Promise.all(/*! import() | auth-auth-module */[__webpack_require__.e("common"), __webpack_require__.e("auth-auth-module")]).then(__webpack_require__.bind(null, /*! ./auth/auth.module */ "./src/app/auth/auth.module.ts")).then(mod => mod.AuthModule)
+        loadChildren: () => __webpack_require__.e(/*! import() | auth-auth-module */ "auth-auth-module").then(__webpack_require__.bind(null, /*! ./auth/auth.module */ "./src/app/auth/auth.module.ts")).then(mod => mod.AuthModule)
     },
     {
         path: '',
@@ -624,22 +624,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AuthGuardService", function() { return AuthGuardService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm2015/store.js");
-/* harmony import */ var _auth_selectors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./auth.selectors */ "./src/app/core/auth/auth.selectors.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm2015/store.js");
+/* harmony import */ var _shared_rest_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../shared/rest-api.service */ "./src/app/shared/rest-api.service.ts");
+
 
 
 
 
 let AuthGuardService = class AuthGuardService {
-    constructor(store) {
+    constructor(store, router, restApi) {
         this.store = store;
+        this.router = router;
+        this.restApi = restApi;
     }
-    canActivate() {
-        return this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_2__["select"])(_auth_selectors__WEBPACK_IMPORTED_MODULE_3__["selectIsAuthenticated"]));
+    canActivate(route, state) {
+        // return this.store.pipe(select(selectIsAuthenticated));
+        if (this.restApi.isLogged()) {
+            return true;
+        }
+        this.router.navigateByUrl(this.router.createUrlTree(['/auth/login'], {
+            queryParams: {
+                returnUrl: state.url
+            }
+        }));
+        return false;
     }
 };
 AuthGuardService.ctorParameters = () => [
-    { type: _ngrx_store__WEBPACK_IMPORTED_MODULE_2__["Store"] }
+    { type: _ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
+    { type: _shared_rest_api_service__WEBPACK_IMPORTED_MODULE_4__["RestApiService"] }
 ];
 AuthGuardService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -743,7 +758,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const initialState = {
-    isAuthenticated: false
+    isAuthenticated: false,
 };
 const reducer = Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_2__["createReducer"])(initialState, Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_2__["on"])(_auth_actions__WEBPACK_IMPORTED_MODULE_1__["authLogin"], state => (Object.assign({}, state, { isAuthenticated: true }))), Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_2__["on"])(_auth_actions__WEBPACK_IMPORTED_MODULE_1__["authLogout"], state => (Object.assign({}, state, { isAuthenticated: false }))));
 function authReducer(state, action) {
@@ -790,34 +805,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _ngrx_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ngrx/store */ "./node_modules/@ngrx/store/fesm2015/store.js");
+/* harmony import */ var _shared_rest_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../shared/rest-api.service */ "./src/app/shared/rest-api.service.ts");
+
 
 
 
 
 let LoggedInAuthGuardService = class LoggedInAuthGuardService {
-    constructor(store, router) {
+    constructor(store, router, restApi) {
         this.store = store;
         this.router = router;
-        this.store.pipe(Object(_ngrx_store__WEBPACK_IMPORTED_MODULE_3__["select"])(state => {
-            console.log(state.auth.isAuthenticated);
-        }));
-        // console.log(this.store.isAuthenticated);
+        this.restApi = restApi;
     }
     resolve() {
-        let userLoggedin = JSON.parse(localStorage.getItem('SHAALE-AUTH'));
-        let userToken = localStorage.getItem('token');
-        console.log(userToken ? null : userToken);
-        // if (userLoggedin) {
-        //   // console.log(userLoggedin.isAuthenticated);
-        //   // this.router.navigate(['/home']);
-        // } else {
-        //   this.router.navigate(['/']);
-        // }
+        if (this.restApi.isLogged()) {
+            console.log(this.restApi.isLogged());
+            this.router.navigateByUrl("/home");
+        }
     }
 };
 LoggedInAuthGuardService.ctorParameters = () => [
     { type: _ngrx_store__WEBPACK_IMPORTED_MODULE_3__["Store"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
+    { type: _shared_rest_api_service__WEBPACK_IMPORTED_MODULE_4__["RestApiService"] }
 ];
 LoggedInAuthGuardService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -1581,6 +1591,209 @@ AuthInterceptor = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/shared/rest-api.service.ts":
+/*!********************************************!*\
+  !*** ./src/app/shared/rest-api.service.ts ***!
+  \********************************************/
+/*! exports provided: RestApiService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RestApiService", function() { return RestApiService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+
+
+
+
+
+let RestApiService = class RestApiService {
+    // localToken = JSON.parse(localStorage.getItem("token"));
+    constructor(http) {
+        this.http = http;
+        // Define API
+        this.apiURL = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl;
+        this.razorPayKey = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].key;
+        this.razorPaySecretKey = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].key_secret;
+        /*========================================
+          CRUD Methods for consuming RESTful API
+        =========================================*/
+        /* ===========
+         Auth API
+        ===================*/
+        // Http Options
+        this.httpOptions = {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+                'Content-Type': 'application/json'
+            })
+        };
+    }
+    isLogged() {
+        return localStorage.getItem('SHAALE-AUTH') != null;
+    }
+    getLoggedinUser() {
+        return localStorage.getItem('loggedinUserData');
+    }
+    // HttpClient API for email signup
+    createUser(newUser) {
+        return this.http.post(this.apiURL + '/auth/signup/email', newUser, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    // HttpClient API for email Login
+    loginUser(newUser) {
+        return this.http.post(this.apiURL + '/auth/login/email', newUser, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    // HttpClient API for social login
+    loginUserSocial(socialUserDetails) {
+        return this.http.post(this.apiURL + '/auth/login/social/' + socialUserDetails.provider, {
+            token: socialUserDetails.token
+        }, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    // HttpClient API for verify email
+    emailVerify(newUser) {
+        return this.http.post(this.apiURL + '/auth/verify/email', newUser, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    // HttpClient API for verify mobile
+    verifyMobile(newUser) {
+        return this.http.post(this.apiURL + '/auth/verify/phone', newUser, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    // HttpClient API for send mobile otp
+    sendOtp(newUser) {
+        return this.http.post(this.apiURL + '/auth/verify/send-otp', newUser, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    // HttpClient API for send email verification
+    sendEmailVerification(newUser) {
+        return this.http.post(this.apiURL + '/auth/verify/send-otp', newUser, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    updatePhone(updateUserDetails) {
+        return this.http.post(this.apiURL + '/auth/me', updateUserDetails, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    updateIsValid(newUser) {
+        return this.http.put(this.apiURL + '/auth/me/sessions/watch/is-valid', newUser, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    // HttpClient API for Forgot Password
+    forgotPassword(data) {
+        return this.http.get(this.apiURL + '/auth/me/forgot-password/' + data, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    // HttpClient API for User details
+    getUserDetails() {
+        return this.http.get(this.apiURL + '/auth/me', this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    // HttpClient API for Sessions
+    getSessions() {
+        return this.http.get(this.apiURL + '/auth/me/sessions', this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    // HttpClient API for Sessions with id
+    getSessionsWIthID() {
+        return this.http.get(this.apiURL + '/auth/me/sessions/{sessionId}', this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    getIsValid() {
+        return this.http.get(this.apiURL + '/auth/me/sessions/watch/is-valid', this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    /* ===========
+    live API
+    ===================*/
+    getLiveHomeDetails() {
+        return this.http.get(this.apiURL + '/live/home', this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    getLiveEvents() {
+        return this.http.get(this.apiURL + '/live/events', this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    getLiveEventDetails(eventUrl) {
+        return this.http.get(this.apiURL + '/live/events/by-url/' + eventUrl, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    getLiveEventVideo(getVideo) {
+        return this.http.get(this.apiURL + '/live/events/by-url/' + getVideo.eventUrl + '/video/' + getVideo.sessionId, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    getLiveVideoComments(getComments) {
+        return this.http.get(this.apiURL + '/live/events/by-url/' + getComments.eventUrl + '/comments/' + getComments.sessionId, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    postLiveVideoComments(postComments) {
+        return this.http.post(this.apiURL + '/live/events/by-url/' + postComments.eventUrl + '/comments/' + postComments.sessionId, {
+            comment: postComments.comment
+        }, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    getCouponCode(couponData) {
+        return this.http.get(this.apiURL + '/live/events/by-id/' + couponData.eventId + '/coupons/' + couponData.coupon, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    purchaseDetails(eventPurchaseData) {
+        return this.http.post(this.apiURL + '/live/events/by-id/' + eventPurchaseData.eventId + '/purchase', {
+            orderId: eventPurchaseData.orderId,
+            couponCode: eventPurchaseData.couponCode
+        }, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    priceConversion() {
+        return this.http.get(this.apiURL + '/live/events/convert/:amount', this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    /* ===========
+    Subscription API
+    ===================*/
+    getSubscriptionDetails(eventPurchaseData) {
+        return this.http.get(this.apiURL + '/subscription/:productId', this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    registerSubscriptionDetails(eventPurchaseData) {
+        return this.http.post(this.apiURL + '/subscription/:productId', eventPurchaseData, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    /* ===========
+    Notification API
+    ===================*/
+    getNotificationDetails() {
+        return this.http.get(this.apiURL + '/notifications', this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    updateNotification(notificationUpdate) {
+        return this.http.post(this.apiURL + '/notifications/update', notificationUpdate, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    /* ===========
+    My order API
+    ===================*/
+    getOrderDetails() {
+        return this.http.get(this.apiURL + '/auth/me/myorders', this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+};
+RestApiService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+];
+RestApiService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    })
+], RestApiService);
+
+
+
+/***/ }),
+
 /***/ "./src/app/shared/seo/seo.service.ts":
 /*!*******************************************!*\
   !*** ./src/app/shared/seo/seo.service.ts ***!
@@ -1668,10 +1881,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_autocomplete__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @angular/material/autocomplete */ "./node_modules/@angular/material/esm2015/autocomplete.js");
 /* harmony import */ var _angular_material_tree__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @angular/material/tree */ "./node_modules/@angular/material/esm2015/tree.js");
 /* harmony import */ var _angular_material_progress_bar__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @angular/material/progress-bar */ "./node_modules/@angular/material/esm2015/progress-bar.js");
-/* harmony import */ var _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @fortawesome/angular-fontawesome */ "./node_modules/@fortawesome/angular-fontawesome/fesm2015/angular-fontawesome.js");
-/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
-/* harmony import */ var _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! @fortawesome/free-brands-svg-icons */ "./node_modules/@fortawesome/free-brands-svg-icons/index.es.js");
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! @angular/material/dialog */ "./node_modules/@angular/material/esm2015/dialog.js");
+/* harmony import */ var _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! @fortawesome/angular-fontawesome */ "./node_modules/@fortawesome/angular-fontawesome/fesm2015/angular-fontawesome.js");
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "./node_modules/@fortawesome/fontawesome-svg-core/index.es.js");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "./node_modules/@fortawesome/free-solid-svg-icons/index.es.js");
+/* harmony import */ var _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @fortawesome/free-brands-svg-icons */ "./node_modules/@fortawesome/free-brands-svg-icons/index.es.js");
 
 
 
@@ -1707,7 +1921,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_31__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faBars"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faUserCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faPowerOff"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faCog"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faRocket"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faPlayCircle"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faGithub"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faMediumM"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faTwitter"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faInstagram"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faYoutube"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faEdit"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faTrash"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faTimes"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faCaretUp"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faCaretDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faExclamationTriangle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faFilter"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faTasks"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faSquare"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faLanguage"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faPaintBrush"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faLightbulb"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faWindowMaximize"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faStream"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faBook"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faBell"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faSearch"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faAngleDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faPhone"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_32__["faPhoneAlt"]);
+
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_32__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faBars"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faUserCircle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faPowerOff"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faCog"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faRocket"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faPlayCircle"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_34__["faGithub"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_34__["faMediumM"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_34__["faTwitter"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_34__["faInstagram"], _fortawesome_free_brands_svg_icons__WEBPACK_IMPORTED_MODULE_34__["faYoutube"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faEdit"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faTrash"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faTimes"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faCaretUp"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faCaretDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faExclamationTriangle"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faFilter"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faTasks"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faCheck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faSquare"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faLanguage"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faPaintBrush"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faLightbulb"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faWindowMaximize"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faStream"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faBook"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faBell"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faSearch"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faAngleDown"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faPhone"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_33__["faPhoneAlt"]);
 let SharedModule = class SharedModule {
 };
 SharedModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1739,7 +1954,8 @@ SharedModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_material_autocomplete__WEBPACK_IMPORTED_MODULE_27__["MatAutocompleteModule"],
             _angular_material_tree__WEBPACK_IMPORTED_MODULE_28__["MatTreeModule"],
             _angular_material_progress_bar__WEBPACK_IMPORTED_MODULE_29__["MatProgressBarModule"],
-            _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_30__["FontAwesomeModule"]
+            _angular_material_dialog__WEBPACK_IMPORTED_MODULE_30__["MatDialogModule"],
+            _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_31__["FontAwesomeModule"]
         ],
         declarations: [],
         exports: [
@@ -1773,7 +1989,8 @@ SharedModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_material_autocomplete__WEBPACK_IMPORTED_MODULE_27__["MatAutocompleteModule"],
             _angular_material_tree__WEBPACK_IMPORTED_MODULE_28__["MatTreeModule"],
             _angular_material_progress_bar__WEBPACK_IMPORTED_MODULE_29__["MatProgressBarModule"],
-            _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_30__["FontAwesomeModule"],
+            _angular_material_dialog__WEBPACK_IMPORTED_MODULE_30__["MatDialogModule"],
+            _fortawesome_angular_fontawesome__WEBPACK_IMPORTED_MODULE_31__["FontAwesomeModule"],
         ]
     })
 ], SharedModule);

@@ -305,9 +305,14 @@
             /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrdersComponent", function () { return OrdersComponent; });
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
             /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-            /* harmony import */ var _core_core_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../core/core.module */ "./src/app/core/core.module.ts");
+            /* harmony import */ var _shared_rest_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../shared/rest-api.service */ "./src/app/shared/rest-api.service.ts");
+            /* harmony import */ var _core_core_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../core/core.module */ "./src/app/core/core.module.ts");
+            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
             var OrdersComponent = /** @class */ (function () {
-                function OrdersComponent() {
+                function OrdersComponent(router, restApi, cd) {
+                    this.router = router;
+                    this.restApi = restApi;
+                    this.cd = cd;
                     this.orderTabs = [
                         { link: 'all-orders', label: 'All Orders' },
                         { link: 'subscriptions', label: 'Subscriptions' },
@@ -316,14 +321,29 @@
                     ];
                 }
                 OrdersComponent.prototype.ngOnInit = function () {
+                    this.getOrders();
+                };
+                OrdersComponent.prototype.getOrders = function () {
+                    var _this = this;
+                    this.restApi.getOrderDetails().subscribe(function (onSuccess) {
+                        console.log(onSuccess);
+                        _this.myOrders = onSuccess;
+                    }, function (onError) {
+                        console.log(onError);
+                    });
                 };
                 return OrdersComponent;
             }());
+            OrdersComponent.ctorParameters = function () { return [
+                { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+                { type: _shared_rest_api_service__WEBPACK_IMPORTED_MODULE_2__["RestApiService"] },
+                { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"] }
+            ]; };
             OrdersComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
                     selector: 'shaale-orders',
                     template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./orders.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/products/account/orders/orders.component.html")).default,
-                    animations: [_core_core_module__WEBPACK_IMPORTED_MODULE_2__["routeAnimations"]],
+                    animations: [_core_core_module__WEBPACK_IMPORTED_MODULE_3__["routeAnimations"]],
                     changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectionStrategy"].OnPush,
                     styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./orders.component.scss */ "./src/app/products/account/orders/orders.component.scss")).default]
                 })

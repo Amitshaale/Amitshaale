@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~library-library-module~organisation-organisation-module"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~library-library-module~live-live-module~organisation-organisation-module"],{
 
 /***/ "./node_modules/ngx-infinite-scroll/modules/ngx-infinite-scroll.js":
 /*!*************************************************************************!*\
@@ -772,4 +772,4 @@ InfiniteScrollModule.decorators = [
 /***/ })
 
 }]);
-//# sourceMappingURL=default~library-library-module~organisation-organisation-module-es2015.js.map
+//# sourceMappingURL=default~library-library-module~live-live-module~organisation-organisation-module-es2015.js.map
