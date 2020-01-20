@@ -2829,7 +2829,7 @@
         /***/ (function (module, __webpack_exports__, __webpack_require__) {
             "use strict";
             __webpack_require__.r(__webpack_exports__);
-            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <div class=\"banner-style\">\n                <!-- <img src=\"./assets/img/library/Archives_Bg-Landing.png\" alt=\"Shaale archive banner image\" /> -->\n                <div class=\"banner-video\">\n                    <video width=\"100%\" height=\"100%\" id=\"myVideo\" #myVideo\n                        poster=\"./assets/img/library/Archives_Bg-Landing.png\">\n                        <source\n                            src=\"http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4\"\n                            type=\"video/mp4\">\n                        Your browser does not support HTML5 video.\n                    </video>\n                </div>\n                <div class=\"banner-overlay-content\">\n                    <p>Get access to unlimited access when you purchase a membership to this Archives.</p>\n                    <div class=\"banner-action\">\n                        <button mat-raised-button class=\"bordered-button\">Submit Resource</button>\n                        <button mat-raised-button class=\"actions-main shaale-red\"\n                            [ngx-scroll-to]=\"'#archiveList'\">Browse</button>\n                        <button mat-icon-button class=\"play-button\" (click)=\"playVideo()\">\n                            <img src=\"./assets/img/library/Play-icon.svg\" alt=\"Play video\" />\n                        </button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    <!-- <div class=\"row\">\n        <div class=\"col-md-12\">\n            <h1 rtl class=\"main-heading\">Archives Content</h1>\n        </div>\n    </div> -->\n    <div class=\"search-results\" infinite-scroll [infiniteScrollDistance]=\"scrollDistance\"\n        [infiniteScrollUpDistance]=\"scrollUpDistance\" [infiniteScrollThrottle]=\"throttle\" [scrollWindow]=\"false\"\n        (scrolled)=\"onScrollDown()\" (scrolledUp)=\"onUp()\" id=\"archiveList\" #archiveListRef>\n        <div class=\"row align-items-end\">\n            <div *ngFor=\"let library of libraryArray\" class=\"col-md-6 col-lg-6\" [ngClass]=\"routeAnimationsElements\">\n                <mat-card class=\"card-style\" routerLink=\"./organisation/archives\">\n                    <img mat-card-image [src]=\"library?.image\" [alt]=\"library?.name\">\n                    <div class=\"card-overlay-content\">\n                        <mat-card-title>\n                            {{library?.name}}\n                        </mat-card-title>\n                        <mat-card-subtitle>\n                            {{ library?.description }}\n                        </mat-card-subtitle>\n                    </div>\n                </mat-card>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"load-more-style\" *ngIf=\"isLoadMoreVisible\">\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <button mat-button (click)=\"onScrollDown()\">\n                    Show more <br>\n                    <fa-icon [icon]=\"['fa', 'angle-down']\"></fa-icon>\n                </button>\n            </div>\n        </div>\n    </div>\n</div>");
+            /* harmony default export */ __webpack_exports__["default"] = ("<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-md-12\">\n            <div class=\"banner-style\">\n                <!-- <img src=\"./assets/img/library/Archives_Bg-Landing.png\" alt=\"Shaale archive banner image\" /> -->\n                <div class=\"banner-video\">\n                    <video width=\"100%\" height=\"100%\" id=\"myVideo\" #myVideo poster=\"{{library?.slider?.image}}\">\n                        <source\n                            src=\"http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4\"\n                            type=\"video/mp4\">\n                        Your browser does not support HTML5 video.\n                    </video>\n                </div>\n                <div class=\"banner-overlay-content\">\n                    <p>{{library?.slider?.caption}}</p>\n                    <div class=\"banner-action\">\n                        <button mat-raised-button class=\"bordered-button\">{{library?.slider?.buttonText}}</button>\n                        <button mat-raised-button class=\"actions-main shaale-red\"\n                            [ngx-scroll-to]=\"'#archiveList'\">Browse</button>\n                        <button mat-icon-button class=\"play-button\" (click)=\"playVideo()\">\n                            <img src=\"./assets/img/library/Play-icon.svg\" alt=\"Play video\" />\n                        </button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    <!-- <div class=\"row\">\n        <div class=\"col-md-12\">\n            <h1 rtl class=\"main-heading\">Archives Content</h1>\n        </div>\n    </div> -->\n    <div class=\"search-results\" infinite-scroll [infiniteScrollDistance]=\"scrollDistance\"\n        [infiniteScrollUpDistance]=\"scrollUpDistance\" [infiniteScrollThrottle]=\"throttle\" [scrollWindow]=\"false\"\n        (scrolled)=\"onScrollDown()\" (scrolledUp)=\"onUp()\" id=\"archiveList\" #archiveListRef>\n        <div class=\"row align-items-end\">\n            <div *ngFor=\"let library of library?.body\" class=\"col-md-6 col-lg-6\" [ngClass]=\"routeAnimationsElements\">\n                <mat-card class=\"card-style\" (click)=\"selectLibrary(library)\">\n                    <img mat-card-image [src]=\"library?.thumbnail\" [alt]=\"library?.name\">\n                    <div class=\"card-overlay-content\">\n                        <mat-card-title>\n                            {{library?.name}}\n                        </mat-card-title>\n                        <mat-card-subtitle>\n                            {{ library?.durationString }}\n                        </mat-card-subtitle>\n                    </div>\n                </mat-card>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"load-more-style\" *ngIf=\"isLoadMoreVisible\">\n        <div class=\"row\">\n            <div class=\"col-md-12\">\n                <button mat-button (click)=\"onScrollDown()\">\n                    Show more <br>\n                    <fa-icon [icon]=\"['fas', 'angle-down']\"></fa-icon>\n                </button>\n            </div>\n        </div>\n    </div>\n</div>");
             /***/ 
         }),
         /***/ "./src/app/products/library/library-audio/library-audio.component.scss": 
@@ -2982,102 +2982,6 @@
             ], LibraryAudioComponent);
             /***/ 
         }),
-        /***/ "./src/app/products/library/library-list.data.ts": 
-        /*!*******************************************************!*\
-          !*** ./src/app/products/library/library-list.data.ts ***!
-          \*******************************************************/
-        /*! exports provided: library */
-        /***/ (function (module, __webpack_exports__, __webpack_require__) {
-            "use strict";
-            __webpack_require__.r(__webpack_exports__);
-            /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "library", function () { return library; });
-            /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-            var library = [
-                {
-                    name: 'Madras Music Academy',
-                    image: './assets/img/library/MadrasMusicAcademy.jpg',
-                    description: '10k hours of content',
-                    github: 'https://github.com/angular/angular',
-                    documentation: 'https://angular.io/docs/ts/latest/'
-                },
-                {
-                    name: 'NCPA',
-                    description: '10k hours of content',
-                    image: './assets/img/library/NCPA.jpg',
-                    github: 'https://github.com/angular/material2/',
-                    documentation: 'https://material.angular.io/'
-                },
-                {
-                    name: 'GIPA',
-                    description: '10k hours of content',
-                    image: './assets/img/library/GIPA.jpg',
-                    github: 'https://github.com/angular/angular-cli',
-                    documentation: 'https://cli.angular.io/'
-                },
-                {
-                    name: 'ITC - SRA',
-                    description: '10k hours of content',
-                    image: './assets/img/library/ITC.jpg',
-                    github: 'https://github.com/ngrx/platform',
-                    documentation: 'http://ngrx.github.io/'
-                },
-                {
-                    name: 'Sangeet Natak Academy',
-                    description: '10k hours of content',
-                    image: './assets/img/library/SangeetNatakAcademy.jpg',
-                    github: 'https://github.com/ReactiveX/RxJS',
-                    documentation: 'http://reactivex.io/rxjs/'
-                },
-                {
-                    name: 'IGNCA',
-                    description: '10k hours of content',
-                    image: './assets/img/library/IGNCA.jpg',
-                    github: 'https://github.com/twbs/bootstrap',
-                    documentation: 'https://getbootstrap.com/docs/4.0/layout/grid/'
-                },
-                {
-                    name: 'Typescript',
-                    description: '10k hours of content',
-                    image: './assets/img/library/MadrasMusicAcademy.jpg',
-                    github: 'https://github.com/Microsoft/TypeScript',
-                    documentation: 'https://www.typescriptlang.org/docs/home.html'
-                },
-                {
-                    name: 'I18n',
-                    description: '10k hours of content',
-                    image: './assets/img/library/MadrasMusicAcademy.jpg',
-                    github: 'https://github.com/ngx-translate/core',
-                    documentation: 'http://www.ngx-translate.com/'
-                },
-                {
-                    name: 'Font Awesome 5',
-                    description: '10k hours of content',
-                    image: './assets/img/library/MadrasMusicAcademy.jpg',
-                    github: 'https://github.com/FortAwesome/Font-Awesome',
-                    documentation: 'https://fontawesome.com/icons'
-                },
-                {
-                    name: 'Cypress',
-                    description: '10k hours of content',
-                    image: './assets/img/library/MadrasMusicAcademy.jpg',
-                    github: 'https://github.com/cypress-io/cypress',
-                    documentation: 'https://www.cypress.io/'
-                },
-                {
-                    name: 'shaale',
-                    description: '10k hours of content',
-                    image: './assets/img/library/MadrasMusicAcademy.jpg',
-                    documentation: 'https://material.angular.io/guide/theming'
-                },
-                {
-                    name: 'shaale',
-                    description: '10k hours of content',
-                    image: './assets/img/library/MadrasMusicAcademy.jpg',
-                    documentation: 'https://angular.io/guide/router#lazy-loading-route-configuration'
-                }
-            ];
-            /***/ 
-        }),
         /***/ "./src/app/products/library/library-routing.module.ts": 
         /*!************************************************************!*\
           !*** ./src/app/products/library/library-routing.module.ts ***!
@@ -3157,7 +3061,7 @@
                     ]
                 },
                 {
-                    path: 'organisation',
+                    path: ':libraryUrl',
                     loadChildren: function () { return Promise.all(/*! import() | organisation-organisation-module */ [__webpack_require__.e("default~library-library-module~live-live-module~organisation-organisation-module"), __webpack_require__.e("organisation-organisation-module")]).then(__webpack_require__.bind(null, /*! ../organisation/organisation.module */ "./src/app/products/organisation/organisation.module.ts")).then(function (mod) { return mod.OrganisationModule; }); }
                 },
             ];
@@ -3526,11 +3430,14 @@
             /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
             /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
             /* harmony import */ var _core_core_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../core/core.module */ "./src/app/core/core.module.ts");
-            /* harmony import */ var _library_list_data__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../library-list.data */ "./src/app/products/library/library-list.data.ts");
+            /* harmony import */ var _shared_rest_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../shared/rest-api.service */ "./src/app/shared/rest-api.service.ts");
+            /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
             var LibraryComponent = /** @class */ (function () {
-                function LibraryComponent() {
+                function LibraryComponent(router, restApi, cd) {
+                    this.router = router;
+                    this.restApi = restApi;
+                    this.cd = cd;
                     this.routeAnimationsElements = _core_core_module__WEBPACK_IMPORTED_MODULE_2__["ROUTE_ANIMATIONS_ELEMENTS"];
-                    this.library = _library_list_data__WEBPACK_IMPORTED_MODULE_3__["library"];
                     this.libraryArray = [];
                     this.sum = 6;
                     this.throttle = 300;
@@ -3539,7 +3446,13 @@
                     this.direction = '';
                     this.appendItems(0, this.sum);
                 }
-                LibraryComponent.prototype.ngOnInit = function () { };
+                LibraryComponent.prototype.ngOnInit = function () {
+                    this.getLibrary();
+                    this.cd.markForCheck();
+                };
+                LibraryComponent.prototype.ngDoCheck = function () {
+                    this.cd.markForCheck();
+                };
                 LibraryComponent.prototype.openLink = function (link) {
                     window.open(link, '_blank');
                 };
@@ -3556,15 +3469,14 @@
                     }
                 };
                 LibraryComponent.prototype.addItems = function (startIndex, endIndex, _method) {
-                    for (startIndex; startIndex < endIndex; ++startIndex) {
-                        if (this.library[startIndex] !== undefined) {
-                            this.isLoadMoreVisible = true;
-                            this.libraryArray[_method](this.library[startIndex]);
-                        }
-                        else {
-                            this.isLoadMoreVisible = false;
-                        }
-                    }
+                    // for (startIndex; startIndex < endIndex; ++startIndex) {
+                    //   if (this.library[startIndex] !== undefined) {
+                    //     this.isLoadMoreVisible = true;
+                    //     this.libraryArray[_method](this.library[startIndex]);
+                    //   } else {
+                    //     this.isLoadMoreVisible = false;
+                    //   }
+                    // }
                 };
                 LibraryComponent.prototype.appendItems = function (startIndex, endIndex) {
                     console.log(startIndex, endIndex);
@@ -3586,8 +3498,26 @@
                     this.prependItems(start, this.sum);
                     this.direction = 'up';
                 };
+                LibraryComponent.prototype.getLibrary = function () {
+                    var _this = this;
+                    this.restApi.getLibraryList().subscribe(function (onSuccess) {
+                        console.log(onSuccess);
+                        _this.library = onSuccess;
+                    }, function (onError) {
+                        console.log(onError);
+                    });
+                };
+                LibraryComponent.prototype.selectLibrary = function (data) {
+                    console.log(data);
+                    this.router.navigateByUrl('/library/' + data.id);
+                };
                 return LibraryComponent;
             }());
+            LibraryComponent.ctorParameters = function () { return [
+                { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+                { type: _shared_rest_api_service__WEBPACK_IMPORTED_MODULE_3__["RestApiService"] },
+                { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"] }
+            ]; };
             tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
                 Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('myVideo', { static: true })
             ], LibraryComponent.prototype, "myVideo", void 0);

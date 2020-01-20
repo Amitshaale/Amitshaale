@@ -479,22 +479,52 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _core_core_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../core/core.module */ "./src/app/core/core.module.ts");
+/* harmony import */ var _shared_rest_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../shared/rest-api.service */ "./src/app/shared/rest-api.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
+
 
 
 
 let OrganisationComponent = class OrganisationComponent {
-    constructor() {
+    constructor(router, route, restApi, cd) {
+        this.router = router;
+        this.route = route;
+        this.restApi = restApi;
+        this.cd = cd;
         this.examples = [
             { link: 'overview', label: 'Overview' },
             { link: 'about', label: 'About' },
             { link: 'archives', label: 'Archives' }
         ];
+        this.loggedinUser = this.restApi.getLoggedinUser();
+        this.route.paramMap.subscribe(param => {
+            console.log(param.get('libraryUrl'));
+            this.libraryUrl = param.get('libraryUrl');
+        });
     }
-    // constructor(private store: Store<State>) {}
     ngOnInit() {
         // this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated));
+        this.getLibraryDetails();
+    }
+    ngDoCheck() {
+        this.cd.markForCheck();
+    }
+    getLibraryDetails() {
+        this.restApi.getLibraryDetail(this.libraryUrl).subscribe((onSuccess) => {
+            console.log(onSuccess);
+            this.libraryHome = onSuccess;
+        }, (onError) => {
+            console.log(onError);
+        });
     }
 };
+OrganisationComponent.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
+    { type: _shared_rest_api_service__WEBPACK_IMPORTED_MODULE_3__["RestApiService"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"] }
+];
 OrganisationComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'shaale-organisation',
