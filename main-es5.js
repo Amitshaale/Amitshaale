@@ -1722,8 +1722,10 @@ var __extends = (this && this.__extends) || (function () {
                     return this.http.get(this.apiURL + '/subscription/:productId', this.httpOptions)
                         .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
                 };
-                RestApiService.prototype.registerSubscriptionDetails = function (eventPurchaseData) {
-                    return this.http.post(this.apiURL + '/subscription/:productId', eventPurchaseData, this.httpOptions)
+                RestApiService.prototype.registerSubscriptionDetails = function (registerData) {
+                    return this.http.post(this.apiURL + '/subscription/' + registerData.productName, {
+                        planId: registerData.planId
+                    }, this.httpOptions)
                         .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
                 };
                 /* ===========
@@ -1753,6 +1755,10 @@ var __extends = (this && this.__extends) || (function () {
                 };
                 RestApiService.prototype.getLibraryDetail = function (libraryUrl) {
                     return this.http.get(this.apiURL + '/library/item/' + libraryUrl, this.httpOptions)
+                        .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+                };
+                RestApiService.prototype.getLibrarySubscriptionDetails = function (libraryUrl) {
+                    return this.http.get(this.apiURL + '/library/item/' + libraryUrl + '/subscription', this.httpOptions)
                         .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
                 };
                 return RestApiService;

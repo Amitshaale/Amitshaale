@@ -1862,8 +1862,10 @@ let RestApiService = class RestApiService {
         return this.http.get(this.apiURL + '/subscription/:productId', this.httpOptions)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
     }
-    registerSubscriptionDetails(eventPurchaseData) {
-        return this.http.post(this.apiURL + '/subscription/:productId', eventPurchaseData, this.httpOptions)
+    registerSubscriptionDetails(registerData) {
+        return this.http.post(this.apiURL + '/subscription/' + registerData.productName, {
+            planId: registerData.planId
+        }, this.httpOptions)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
     }
     /* ===========
@@ -1893,6 +1895,10 @@ let RestApiService = class RestApiService {
     }
     getLibraryDetail(libraryUrl) {
         return this.http.get(this.apiURL + '/library/item/' + libraryUrl, this.httpOptions)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+    }
+    getLibrarySubscriptionDetails(libraryUrl) {
+        return this.http.get(this.apiURL + '/library/item/' + libraryUrl + '/subscription', this.httpOptions)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
     }
 };
