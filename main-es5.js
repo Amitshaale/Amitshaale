@@ -1754,11 +1754,19 @@ var __extends = (this && this.__extends) || (function () {
                         .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
                 };
                 RestApiService.prototype.getLibraryDetail = function (libraryUrl) {
-                    return this.http.get(this.apiURL + '/library/item/' + libraryUrl, this.httpOptions)
+                    return this.http.get(this.apiURL + '/library/item/by-url/' + libraryUrl, this.httpOptions)
                         .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
                 };
                 RestApiService.prototype.getLibrarySubscriptionDetails = function (libraryUrl) {
-                    return this.http.get(this.apiURL + '/library/item/' + libraryUrl + '/subscription', this.httpOptions)
+                    return this.http.get(this.apiURL + '/library/item/by-url/' + libraryUrl + '/subscription', this.httpOptions)
+                        .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+                };
+                RestApiService.prototype.getLibraryVideoDetails = function (libraryUrl) {
+                    return this.http.get(this.apiURL + '/library/item/by-url/' + libraryUrl + '/video/' + libraryUrl, this.httpOptions)
+                        .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
+                };
+                RestApiService.prototype.getLibraryAudioDetails = function (libraryUrl, itemId) {
+                    return this.http.get(this.apiURL + '/library/item/by-url/' + libraryUrl + '/audio/' + itemId, this.httpOptions)
                         .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["retry"])(1));
                 };
                 return RestApiService;

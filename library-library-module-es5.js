@@ -3509,7 +3509,7 @@
                 };
                 LibraryComponent.prototype.selectLibrary = function (data) {
                     console.log(data);
-                    this.router.navigateByUrl('/library/' + data.id);
+                    this.router.navigateByUrl('/library/' + data.url);
                 };
                 return LibraryComponent;
             }());

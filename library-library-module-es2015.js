@@ -3992,7 +3992,7 @@ let LibraryComponent = class LibraryComponent {
     }
     selectLibrary(data) {
         console.log(data);
-        this.router.navigateByUrl('/library/' + data.id);
+        this.router.navigateByUrl('/library/' + data.url);
     }
 };
 LibraryComponent.ctorParameters = () => [
